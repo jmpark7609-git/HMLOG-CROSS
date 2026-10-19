@@ -182,7 +182,10 @@ namespace HMLOG.App
         Control Build(TRow r)
         {
             if (r == null) return new Border();
-            var fore = r.Fore.HasValue ? Pal.Br(Pal.Fg(r.Fore.Value.R, r.Fore.Value.G, r.Fore.Value.B)) : Pal.Br(Pal.Text);
+            // text readable on the row's own background, whatever colors the row carries
+            var fc = r.Fore.HasValue ? Pal.Fg(r.Fore.Value.R, r.Fore.Value.G, r.Fore.Value.B) : Pal.Text;
+            var bc = r.Hit ? Pal.HitBack : r.Back.HasValue ? Pal.Bg(r.Back.Value.R, r.Back.Value.G, r.Back.Value.B) : Pal.Surface;
+            var fore = Pal.Br(Pal.Ensure(fc, bc, 4.5));
             if (r.Span)
             {
                 var t = new TextBlock { Text = r.Cells[0], Foreground = fore, VerticalAlignment = VerticalAlignment.Center,
