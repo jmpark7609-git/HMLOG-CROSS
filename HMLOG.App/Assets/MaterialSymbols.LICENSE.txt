@@ -1,0 +1,4 @@
+MaterialSymbols.ttf contains glyphs of Material Symbols Rounded (Google), a subset made by make_icon_font.py.
+Material Symbols are licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
+Copyright Google LLC. The glyph outlines are used unchanged apart from fixing the variable axes
+(FILL 0, GRAD 0, opsz 20, wght 400) and removing the other glyphs.
