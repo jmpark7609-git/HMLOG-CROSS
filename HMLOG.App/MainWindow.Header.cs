@@ -250,8 +250,8 @@ namespace HMLOG.App
             stItems.Children.Add(StatCell(StatItem(Icons.Doc, "", out stFile))); stLabel = stFile; stFile.FontWeight = FontWeight.Normal; stFile.Text = "no input";
             stItems.Children.Add(StatCell(StatItem(Icons.Rows, "Raw", out stRaw)));
             stItems.Children.Add(StatCell(StatItem(Icons.Port, "Transactions", out stTx)));
-            stItems.Children.Add(StatCell(StatItem(Icons.Warn, "NACK", out stNack)));
-            stItems.Children.Add(StatCell(StatItem(Icons.Warn, "Cut off", out stCut)));
+            stItems.Children.Add(ErrClick(StatCell(StatItem(Icons.Warn, "NACK", out stNack))));
+            stItems.Children.Add(ErrClick(StatCell(StatItem(Icons.Warn, "Cut off", out stCut))));
             stItems.Children.Add(StatCell(StatItem(Icons.Warn, "FIFO overflow", out stFifo), true));
             foreach (var t in new[] { stRaw, stTx, stNack, stCut, stFifo }) t.MinWidth = 36;
             stRight = new TextBlock { Margin = new Thickness(0, 4, 10, 4), VerticalAlignment = VerticalAlignment.Center, Foreground = Pal.Br(Pal.Muted), HorizontalAlignment = HorizontalAlignment.Right };
@@ -288,13 +288,15 @@ namespace HMLOG.App
             var scdc = new TabControl { Items = { scdcRegs, tabScdcTrain } };
             var dataStats = new TabItem { Header = "STATISTICS", Content = BuildStatsTab() };
             var dataRaw = new TabItem { Header = "RAW", Content = BuildRawTab() };
-            var data = new TabControl { Items = { dataStats, dataRaw } };
+            tabErrors = new TabItem { Header = "ERRORS", Content = BuildErrTab() };
+            dataTabs = new TabControl { Items = { dataStats, tabErrors, dataRaw } };
+            tabData = MainTab("DATA", dataTabs);
             tabs.Items.Add(MainTab("LOG", BuildLogTab()));
             tabs.Items.Add(MainTab("SCDC", scdc));
             tabs.Items.Add(tabHdcp);
             tabs.Items.Add(tabEdid);
             tabs.Items.Add(MainTab("CEC", BuildCecTab()));
-            tabs.Items.Add(MainTab("DATA", data));
+            tabs.Items.Add(tabData);
             tabs.Items.Add(MainTab("BOARD", BuildBoardTab()));
             root.Children.Add(tabs);
 

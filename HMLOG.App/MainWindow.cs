@@ -455,6 +455,7 @@ namespace HMLOG.App
             if (Visible(hdcpTable) && dec.Version != hdcpVer) RebuildHdcp();
             if (Visible(regsTable) && dec.Version != regsVer) RebuildRegs();
             if (Visible(statsTable) && dec.Version != statsVer) RebuildStats();
+            if (Visible(errList) && dec.Version != errVer) RebuildErr();
             if (Visible(tbEdid) && dec.EdidVersion != edidVer) RebuildEdid();
             if (Visible(rawTable)) AppendRaw();
 
